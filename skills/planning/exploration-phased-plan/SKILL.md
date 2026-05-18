@@ -12,7 +12,7 @@ For the **feature or request** the user states with this invocation (same messag
 
 1. **Explore the current project deeply** until you understand how the change fits architecture, conventions, and existing code paths.
 2. **Write a detailed phased plan** as a markdown file under `./docs/plans` (create the directory if it does not exist).
-3. **Create an accompanying ADR progress** markdown file under `./docs/adr` (create the directory if it does not exist), with a **top-level header (`##`) for each phase** from the plan, ready for decisions and status as work proceeds.
+3. **Create an accompanying ADR progress** markdown file under `./docs/plans/progress` (create the directory if it does not exist), with a **top-level header (`##`) for each phase** from the plan, ready for decisions and status as work proceeds.
 
 Optional handoff: the plan and ADR paths can later be fed to the **implement-plan** skill as the plan file and progress file.
 
@@ -50,7 +50,7 @@ If the repo is large, prioritize breadth where it affects the request, then dept
 
 Phases should be **sequenced for implementation** (dependencies first, vertical slices when useful).
 
-### 2. ADR progress file — `./docs/adr/<slug>-progress.md`
+### 2. ADR progress file — `./docs/plans/progress/<slug>-progress.md`
 
 - Use the **same `<slug>`** as the plan file (same collision rules if the ADR file exists).
 - **One `##` header per plan phase**, in the same order and with **matching titles** to the plan’s phase headings (same phase number and short title).
@@ -82,7 +82,7 @@ At the top of the file, a single `#` title line summarizing the effort (e.g. `# 
 
 1. Confirm the **feature or request** from the user message; if ambiguous, ask one clarifying question before exploring further.
 2. Run **deep exploration** (this section is blocking for quality).
-3. Ensure `./docs/plans` and `./docs/adr` exist (`mkdir -p` or equivalent if missing).
+3. Ensure `./docs/plans` and `./docs/plans/progress` exist (`mkdir -p` or equivalent if missing).
 4. Write **both** markdown files in one pass when possible so phase headers stay aligned.
 5. In the chat reply, give **full paths** to both files and a **two- or three-sentence** summary of the approach; do not paste the entire plan unless the user asks.
 
@@ -95,7 +95,7 @@ At the top of the file, a single `#` title line summarizing the effort (e.g. `# 
 ## Examples
 
 **User:** “Add CSV export to the reports screen” + this skill attached.\
-**Agent:** Explore reporting UI, data sources, and export patterns → write `docs/plans/reports-csv-export.md` and `docs/adr/reports-csv-export-progress.md` with `##` headers per phase.
+**Agent:** Explore reporting UI, data sources, and export patterns → write `docs/plans/reports-csv-export.md` and `docs/plans/reports-csv-export-progress.md` with `##` headers per phase.
 
 **User:** Same slug already in `docs/plans`.\
-**Agent:** Write `docs/plans/reports-csv-export-v2.md` and `docs/adr/reports-csv-export-v2-progress.md`, note the collision in the reply.
+**Agent:** Write `docs/plans/reports-csv-export-v2.md` and `docs/plans/progress/reports-csv-export-v2-progress.md`, note the collision in the reply.

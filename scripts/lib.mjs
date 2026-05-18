@@ -21,6 +21,20 @@ const FORBIDDEN_DEST = ".cursor/skills-cursor";
 
 const NAME_PATTERN = /^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$/;
 
+/** macOS / Windows folder metadata and AppleDouble sidecars */
+const IGNORED_ENTRY_NAMES = new Set([".DS_Store", "Thumbs.db", "desktop.ini"]);
+
+function isIgnoredEntry(name) {
+  return IGNORED_ENTRY_NAMES.has(name) || name.startsWith("._");
+}
+
+/** Skip junk files at skills/ listing levels; only skill/category dirs matter */
+function shouldSkipEntry(entry) {
+  if (isIgnoredEntry(entry.name)) return true;
+  if (!entry.isDirectory()) return true;
+  return false;
+}
+
 function destinationPaths(home = os.homedir()) {
   return DESTINATION_DIRS.map((dir) => path.join(home, dir));
 }
@@ -48,7 +62,7 @@ async function childDirsWithSkillMd(parentDir) {
   const entries = await fs.readdir(parentDir, { withFileTypes: true });
   const matches = [];
   for (const entry of entries) {
-    if (!entry.isDirectory()) continue;
+    if (shouldSkipEntry(entry)) continue;
     const childPath = path.join(parentDir, entry.name);
     if (await hasSkillMd(childPath)) matches.push(entry.name);
   }
@@ -67,9 +81,7 @@ export async function discoverSkills() {
   const skills = [];
 
   for (const entry of entries) {
-    if (!entry.isDirectory()) {
-      fail(`Invalid entry in skills/: ${entry.name} (expected a directory)`);
-    }
+    if (shouldSkipEntry(entry)) continue;
 
     const entryPath = path.join(SKILLS_DIR, entry.name);
 
@@ -88,7 +100,7 @@ export async function discoverSkills() {
     let foundSkill = false;
 
     for (const child of children) {
-      if (!child.isDirectory()) continue;
+      if (shouldSkipEntry(child)) continue;
       const childPath = path.join(entryPath, child.name);
 
       if (!(await hasSkillMd(childPath))) {

@@ -1,10 +1,12 @@
 {
   "version": 1,
   "skills": [
-    "create-skill",
+    "author-skill",
     "exploration-phased-plan",
     "good-commit",
     "grill-with-docs",
-    "implement-plan"
+    "handoff",
+    "implement-plan",
+    "research-and-document"
   ]
 }

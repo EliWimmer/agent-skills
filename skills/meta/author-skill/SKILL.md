@@ -1,9 +1,9 @@
 ---
-name: create-skill
+name: author-skill
 description: Documents standards for authoring skills in this repository and when to create or update a skill. Use when creating a new skill, editing SKILL.md frontmatter, or asking how skills should be structured in the agent-skills source repo.
 ---
 
-# Create skill
+# Authoring a skill
 
 ## Repository layout
 
