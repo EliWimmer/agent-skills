@@ -1,7 +1,8 @@
 {
   "version": 1,
   "skills": [
-    "author-skill",
+    "author-new-skill",
+    "context-cleanup",
     "exploration-phased-plan",
     "good-commit",
     "grill-with-docs",

@@ -1,5 +1,5 @@
 ---
-name: author-skill
+name: author-new-skill
 description: Documents standards for authoring skills in this repository and when to create or update a skill. Use when creating a new skill, editing SKILL.md frontmatter, or asking how skills should be structured in the agent-skills source repo.
 ---
 
@@ -43,10 +43,12 @@ description: What the skill does and when the agent should use it. Third person;
 ---
 ```
 
-| Field | Rules |
-|-------|--------|
-| `name` | Lowercase letters, numbers, hyphens; 1–64 chars; **must match the parent folder name** |
-| `description` | Non-empty; third person; state **what** it does and **when** to use it |
+
+| Field         | Rules                                                                                  |
+| ------------- | -------------------------------------------------------------------------------------- |
+| `name`        | Lowercase letters, numbers, hyphens; 1–64 chars; **must match the parent folder name** |
+| `description` | Non-empty; third person; state **what** it does and **when** to use it                 |
+
 
 Optional: `disable-model-invocation: true` when the skill should load only when explicitly invoked.
 
@@ -79,3 +81,4 @@ Write for discovery, not marketing:
 2. Add `SKILL.md` with matching `name` and a strong `description`
 3. Run `./scripts/install.sh` and commit `manifest.json` with your changes
 4. Invoke the skill in your agent to verify discovery
+

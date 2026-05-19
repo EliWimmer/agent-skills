@@ -37,6 +37,24 @@ Cross-platform tooling (Node `.mjs` core with thin `*.sh` / `*.ps1` wrappers) th
 **Create-skill skill**:
 A tool-agnostic skill at `skills/meta/create-skill/` that documents how to author skills for this repository; installed like any other skill. Does not duplicate per-tool variants.
 
+**Context**:
+A bounded domain area with its own glossary (`CONTEXT.md`), vocabulary, and relationships. One repo may contain several contexts.
+
+**CONTEXT-MAP.md**:
+Root index listing each context, where its `CONTEXT.md` lives, and how contexts relate. Present when a repo has multiple contexts.
+
+**Context-specific CONTEXT.md**:
+A glossary colocated with its domain (e.g. `src/ordering/CONTEXT.md`), not the repo root. Holds terms for that context only.
+
+**Root glossary**:
+An optional root `CONTEXT.md` holding cross-cutting terms shared across contexts. Absent in most multi-context repos; `CONTEXT-MAP.md` is the root artifact instead.
+
+**Shared terms**:
+Cross-context vocabulary defined inline in `CONTEXT-MAP.md` under a Shared section, or in `docs/shared/CONTEXT.md` if the list grows large. Not kept in a root `CONTEXT.md` after a context split.
+
+**Context split**:
+Reorganising a bloated root `CONTEXT.md` into domain-specific glossaries plus a `CONTEXT-MAP.md`. Done via propose → confirm → execute; root `CONTEXT.md` is deleted after.
+
 ## Relationships
 
 - The **Skill source tree** contains many **Skills**, optionally grouped in **Category folders**

@@ -21,6 +21,13 @@ Only include these when they add genuine value. Most ADRs won't need them.
 - **Status** frontmatter (`proposed | accepted | deprecated | superseded by ADR-NNNN`) — useful when decisions are revisited
 - **Considered Options** — only when the rejected alternatives are worth remembering
 - **Consequences** — only when non-obvious downstream effects need to be called out
+- **See also** — one-line link to a context glossary when the decision introduces or relies on domain terms defined in `docs/context/` (optional; not required on every ADR)
+
+Example:
+
+```md
+See also: [Tab lifecycle](../context/explorer/tab-lifecycle.md)
+```
 
 ## Numbering
 

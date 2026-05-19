@@ -1,6 +1,23 @@
-# CONTEXT.md Format
+# Context Glossary Format
 
-## Structure
+Context glossaries live under `docs/context/`. Use this format for every context file — top-level `CONTEXT.md` and sub-context `<slug>.md` files alike.
+
+## Layout
+
+```
+docs/context/
+├── CONTEXT.md              ← cross-cutting terms only
+├── CONTEXT-MAP.md            ← index (create when a second context emerges)
+├── <bounded-context>/
+│   └── <slug>.md
+└── ...
+```
+
+- **Subdirectories** — kebab-case bounded-context names (semantic, not `src/` paths)
+- **Slug files** — kebab-case; one cohesive glossary cluster per file
+- New subdirectory when the bounded context is genuinely separate; new slug file when an existing context fits but the glossary is large or covers a distinct sub-area
+
+## Glossary structure
 
 ```md
 # {Context Name}
@@ -34,7 +51,14 @@ _Avoid_: Client, buyer, account
 ## Flagged ambiguities
 
 - "account" was used to mean both **Customer** and **User** — resolved: these are distinct concepts.
+
+## Related
+
+- [Fulfillment](./fulfillment/shipping.md) — when invoices are generated
+- [ADR-0042: Event-sourced orders](../../adr/0042-event-sourced-orders.md)
 ```
+
+Include `## Related` only when links exist (3–6 items max). Skip links already obvious from `CONTEXT-MAP.md`.
 
 ## Rules
 
@@ -42,24 +66,28 @@ _Avoid_: Client, buyer, account
 - **Flag conflicts explicitly.** If a term is used ambiguously, call it out in "Flagged ambiguities" with a clear resolution.
 - **Keep definitions tight.** One sentence max. Define what it IS, not what it does.
 - **Show relationships.** Use bold term names and express cardinality where obvious.
-- **Only include terms specific to this project's context.** General programming concepts (timeouts, error types, utility patterns) don't belong even if the project uses them extensively. Before adding a term, ask: is this a concept unique to this context, or a general programming concept? Only the former belongs.
-- **Group terms under subheadings** when natural clusters emerge. If all terms belong to a single cohesive area, a flat list is fine.
-- **Write an example dialogue.** A conversation between a dev and a domain expert that demonstrates how the terms interact naturally and clarifies boundaries between related concepts.
+- **Only include terms specific to this project's context.** General programming concepts don't belong.
+- **Group terms under subheadings** when natural clusters emerge.
+- **Write an example dialogue** that shows how terms interact and clarifies boundaries.
 
-## Single vs multi-context repos
+## Top-level vs sub-context
 
-**Single context (most repos):** One `CONTEXT.md` at the repo root.
+**`docs/context/CONTEXT.md`:** cross-cutting terms only. When mentioning a term owned elsewhere, link out — do not duplicate the definition.
 
-**Multiple contexts:** A `CONTEXT-MAP.md` at the repo root lists the contexts, where they live, and how they relate to each other:
+**Sub-context files:** terms owned by one bounded context. Link to siblings and ADRs in `## Related` when the relationship is non-obvious.
+
+## CONTEXT-MAP.md
+
+Create when a second bounded context emerges (or during mid-grill split). Lives at `docs/context/CONTEXT-MAP.md`:
 
 ```md
 # Context Map
 
 ## Contexts
 
-- [Ordering](./src/ordering/CONTEXT.md) — receives and tracks customer orders
-- [Billing](./src/billing/CONTEXT.md) — generates invoices and processes payments
-- [Fulfillment](./src/fulfillment/CONTEXT.md) — manages warehouse picking and shipping
+- [Ordering](./ordering/fulfillment.md) — receives and tracks customer orders
+- [Billing](./billing/invoicing.md) — generates invoices and processes payments
+- [Fulfillment](./fulfillment/shipping.md) — warehouse picking and shipping
 
 ## Relationships
 
@@ -68,10 +96,16 @@ _Avoid_: Client, buyer, account
 - **Ordering ↔ Billing**: Shared types for `CustomerId` and `Money`
 ```
 
-The skill infers which structure applies:
+## Cross-linking
 
-- If `CONTEXT-MAP.md` exists, read it to find contexts
-- If only a root `CONTEXT.md` exists, single context
-- If neither exists, create a root `CONTEXT.md` lazily when the first term is resolved
+- **Context → context:** relative path within `docs/context/`; link to the most specific slug file
+- **Context → ADR:** relative path to `docs/adr/NNNN-slug.md` when a term depends on a recorded decision
+- **ADR → context:** optional one-line "See also" in the ADR body when the decision introduces domain terms
+- **Top-level CONTEXT.md → sub-context:** link when mentioning a term without owning its definition
 
-When multiple contexts exist, infer which one the current topic relates to. If unclear, ask.
+## Discovery
+
+- If `CONTEXT-MAP.md` exists → read it to find contexts
+- If only `docs/context/CONTEXT.md` exists → single-context repo (for now)
+- If neither exists → create `docs/context/CONTEXT.md` lazily when the first term is resolved
+- Infer which sub-context the current topic relates to; if unclear, ask
