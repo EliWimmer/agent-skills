@@ -79,4 +79,4 @@ Use `sync` when you want to push copies without updating the manifest or pruning
 
 ## Domain language
 
-See [CONTEXT.md](./CONTEXT.md) for glossary terms used in this repo.
+See [docs/context/CONTEXT.md](./docs/context/CONTEXT.md) for glossary terms used in this repo.
