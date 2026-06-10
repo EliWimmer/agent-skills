@@ -1,13 +1,23 @@
 {
   "version": 1,
   "skills": [
+    "ask-with-docs",
     "author-new-skill",
+    "caveman",
+    "claude-frontend-design",
     "context-cleanup",
+    "design-taste-frontend",
     "exploration-phased-plan",
+    "fix-with-docs",
     "good-commit",
     "grill-with-docs",
     "handoff",
+    "humanizer",
     "implement-plan",
-    "research-and-document"
+    "planning-docs",
+    "research-and-document",
+    "seo-audit",
+    "svelte-boundary",
+    "svelte-tailwind-4"
   ]
 }

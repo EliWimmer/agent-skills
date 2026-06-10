@@ -9,6 +9,17 @@ Ask the questions one at a time, waiting for feedback on each question before co
 
 If a question can be answered by exploring the codebase, explore the codebase instead.
 
+### AskQuestion tool
+
+When the **AskQuestion** tool is available, use it for grilling:
+
+- **One question per call** — wait for the answer before asking the next
+- **Concrete options** — offer 2+ choices; include your recommended answer as an option (label it, e.g. `Recommended: …`)
+- **Prompt for context** — brief trade-offs, glossary conflicts, or scenario setup belong in the prompt, not in option labels
+- **`allow_multiple`** — only when the decision genuinely requires selecting more than one option
+
+Fall back to chat when the question is open-ended, needs a scenario walkthrough, or cannot be expressed as discrete choices.
+
 ## Domain awareness
 
 During codebase exploration, also look for existing documentation.
