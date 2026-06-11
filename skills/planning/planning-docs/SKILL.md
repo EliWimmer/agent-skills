@@ -18,11 +18,13 @@ docs/
 │       └── <slug>.md           ← one glossary cluster per file
 ├── adr/                        ← irreversible decisions (grill-with-docs)
 │   └── NNNN-slug.md
-├── plans/                      ← phased implementation plans (exploration-phased-plan)
+├── plans/                      ← phased implementation plans (plan-with-docs)
 │   ├── <slug>.md
 │   └── progress/
-│       └── <slug>-progress.md  ← status & notes per phase (implement-plan updates this)
-└── research/                   ← dated investigations (research-and-document)
+│       └── <slug>-progress.md  ← status & notes per phase (implement-with-docs updates this)
+├── research/                   ← dated investigations (research-with-docs)
+│   └── YYYY_MM_DD-<slug>.md
+└── audits/                     ← gap and drift reviews (audit-with-docs)
     └── YYYY_MM_DD-<slug>.md
 ```
 
@@ -34,23 +36,27 @@ docs/
 |------|---------|------------|
 | `docs/context/` | Canonical domain terms, aliases to avoid, relationships | grill-with-docs; reorganized by context-cleanup |
 | `docs/adr/` | Durable “why we chose X” decisions | grill-with-docs (sparingly) |
-| `docs/plans/<slug>.md` | Phased scope, tasks, verification per phase | exploration-phased-plan |
-| `docs/plans/progress/<slug>-progress.md` | Per-phase status, decisions, notes during implementation | implement-plan (do not use the plan file for completion status) |
-| `docs/research/` | Evidence-based deep dives, optional decision tables | research-and-document |
+| `docs/plans/<slug>.md` | Phased scope, tasks, verification per phase | plan-with-docs |
+| `docs/plans/progress/<slug>-progress.md` | Per-phase status, decisions, notes during implementation | implement-with-docs (do not use the plan file for completion status) |
+| `docs/research/` | Evidence-based deep dives, optional decision tables | research-with-docs |
+| `docs/audits/` | Gap, drift, and completeness reviews against docs and code | audit-with-docs |
+
+Doc-aware skills live under `skills/with-docs/` in the source repo; shared reference files are injected into each skill's `references/` folder at install. See [planning doc-system glossary](../../docs/context/planning-doc-system/glossary.md).
 
 Handoff documents (handoff skill) are ephemeral temp files — follow their paths to real artifacts above; do not treat them as source of truth.
 
 ## Mandatory read pass (before code)
 
-1. **Check** whether `docs/` exists and list `docs/plans/`, `docs/context/`, `docs/adr/`, `docs/research/` when present.
+1. **Check** whether `docs/` exists and list `docs/plans/`, `docs/context/`, `docs/adr/`, `docs/research/`, and `docs/audits/` when present.
 2. **Bind the task** to artifacts:
    - User named paths → read those files **in full**.
-   - Feature or area named → search filenames and headings under `docs/plans/` and `docs/research/`; read the best match(es) in full.
+   - Feature or area named → search filenames and headings under `docs/plans/`, `docs/research/`, and `docs/audits/`; read the best match(es) in full.
    - No explicit doc → still read `docs/context/CONTEXT-MAP.md` or `docs/context/CONTEXT.md` when context docs exist.
 3. **Context glossary:** If `CONTEXT-MAP.md` exists, open the sub-context that matches the feature area; otherwise read `docs/context/CONTEXT.md`. Scan top-level `CONTEXT.md` for terms that span contexts.
 4. **Plans in flight:** If a plan applies, read the **entire** plan and its matching `docs/plans/progress/<slug>-progress.md` (same slug). Respect the user’s phase scope but keep full-document context.
 5. **ADRs:** Read ADRs linked from the plan, progress file, context `## Related`, or research `## References`; skim `docs/adr/` titles when the task touches architecture or past trade-offs.
 6. **Research:** Read dated files under `docs/research/` when the task overlaps their topic or the user is continuing prior investigation.
+7. **Audits:** Read prior audits under `docs/audits/` when the task overlaps an audited area or addresses listed findings.
 
 Read **entire files** for plan and progress docs — do not skim. For glossaries and long research docs, read the sections that govern the current task; read the full glossary when terminology is central.
 
@@ -58,7 +64,7 @@ Read **entire files** for plan and progress docs — do not skim. For glossaries
 
 - **Align language** with `docs/context/` — use canonical terms; do not introduce synonyms flagged as “avoid”.
 - **Follow the plan** for scope, phase boundaries, and verification; if the plan conflicts with the codebase, surface it before large changes.
-- **Update progress, not the plan** when executing via implement-plan unless the user asks to edit the plan.
+- **Update progress, not the plan** when executing via implement-with-docs unless the user asks to edit the plan.
 - **Prefer citations** in replies and commits: reference paths (e.g. `docs/plans/oauth-device-flow.md`, `docs/adr/0002-postgres-for-write-model.md`) instead of duplicating long excerpts.
 - **Do not contradict** accepted ADRs or glossaries without calling out the conflict and asking how to proceed.
 

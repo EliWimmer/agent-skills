@@ -1,6 +1,6 @@
 ---
 name: exploration-phased-plan
-description: Performs deep codebase exploration and produces a detailed phased implementation plan plus a matching ADR progress scaffold. Use when the user invokes exploration/phased planning, attaches this skill, or asks for a phased plan with docs under docs/plans and docs/adr for a specific feature or request.
+description: "Deprecated — use plan-with-docs instead. Legacy: deep codebase exploration and phased plan under docs/plans without docs/context grounding. Kept in source tree only; not installed by manifest."
 disable-model-invocation: true
 ---
 

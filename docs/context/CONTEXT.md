@@ -17,7 +17,7 @@ An optional single subdirectory directly under `skills/` that groups related ski
 The leaf directory name under `skills/` (e.g. `grill-with-docs`). Must be unique across the entire source tree; duplicate leaf names under different category folders are invalid. Must match the `name` field in that skill's `SKILL.md` frontmatter; install and sync fail if they differ.
 
 **Install destination**:
-A personal, global skills directory on the machine (under the user home directory) where synced skills appear as sibling folders. Project-local paths (e.g. `.cursor/skills/`) are out of scope for v1. Default targets: `~/.agents/skills/`, `~/.cursor/skills/`, `~/.claude/skills/`, and `~/.gemini/skills/`. Never write to `~/.cursor/skills-cursor/`.
+A personal, global skills directory on the machine (under the user home directory) where synced skills appear as sibling folders. Project-local paths (e.g. `.cursor/skills/`) are out of scope for v1. Default targets: `~/.agents/skills/`, `~/.claude/skills/`, `~/.codex/skills/`, `~/.cursor/skills/`, and `~/.gemini/skills/`. Never write to `~/.cursor/skills-cursor/`.
 
 **Sync**:
 Copying skill directories from the source tree into one or more install destinations, replacing each destination skill folder wholesale if it already exists. Sync never deletes destination folders for skills absent from the source tree (other tools may share the same install directories), and does not read or write `manifest.json`. Uses the same validation rules as **Install** before copying.
@@ -64,8 +64,8 @@ Reorganising a bloated root `CONTEXT.md` into domain-specific glossaries plus a 
 
 ## Example dialogue
 
-> **Dev:** "I added `skills/planning/grill-with-docs/` — where does it show up after sync?"
-> **Maintainer:** "As `grill-with-docs/` next to your other skills in each install destination, not under `planning/`."
+> **Dev:** "I added `skills/with-docs/grill-with-docs/` — where does it show up after sync?"
+> **Maintainer:** "As `grill-with-docs/` next to your other skills in each install destination, not under `with-docs/`. Shared files from `_shared_references/` land in each skill's `references/` folder."
 >
 > **Dev:** "I deleted a skill from the repo—will sync remove it from `~/.cursor/skills/`?"
 > **Maintainer:** "Sync alone won't touch it. Run install (which prunes orphans) or uninstall; only skills this repo previously installed are removed."
@@ -73,3 +73,7 @@ Reorganising a bloated root `CONTEXT.md` into domain-specific glossaries plus a 
 ## Flagged ambiguities
 
 (none)
+
+## Related
+
+- [`*-with-docs` skill-set audit](../audits/2026_06_11-with-docs-skill-set.md) — review of the doc-aware planning skill family in this source tree

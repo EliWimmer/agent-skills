@@ -1,6 +1,6 @@
 ---
 name: implement-plan
-description: Executes work from a written plan file after a short planning pass, then records outcomes in an ADR or progress file. Use when the user invokes /implement-plan, attaches this skill, or provides a plan path, ADR/progress path, and optional phase to implement.
+description: "Deprecated — use implement-with-docs instead. Legacy: execute a plan with a separate progress path and no docs/context grounding. Kept in source tree only; not installed by manifest."
 disable-model-invocation: true
 ---
 # Implement plan

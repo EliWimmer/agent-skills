@@ -12,8 +12,9 @@ const MANIFEST_PATH = path.join(REPO_ROOT, "manifest.json");
 
 const DESTINATION_DIRS = [
   ".agents/skills",
-  ".cursor/skills",
   ".claude/skills",
+  ".codex/skills",
+  ".cursor/skills",
   ".gemini/skills",
 ];
 
@@ -69,8 +70,16 @@ async function childDirsWithSkillMd(parentDir) {
   return matches;
 }
 
+const SHARED_PREFIX = "_shared_";
+const SHARED_REF_REWRITE_FROM = "../_shared_references/";
+const SHARED_REF_REWRITE_TO = "./references/";
+
+function isSharedCategoryEntry(name) {
+  return name.startsWith(SHARED_PREFIX);
+}
+
 /**
- * @returns {Promise<Array<{ name: string, sourcePath: string, category: string | null }>>}
+ * @returns {Promise<Array<{ name: string, sourcePath: string, category: string | null, categoryPath: string | null }>>}
  */
 export async function discoverSkills() {
   if (!(await pathExists(SKILLS_DIR))) {
@@ -92,7 +101,12 @@ export async function discoverSkills() {
           `Invalid layout: skills/${entry.name}/ contains SKILL.md and nested skill folders (${nested.join(", ")})`,
         );
       }
-      skills.push({ name: entry.name, sourcePath: entryPath, category: null });
+      skills.push({
+        name: entry.name,
+        sourcePath: entryPath,
+        category: null,
+        categoryPath: null,
+      });
       continue;
     }
 
@@ -101,6 +115,7 @@ export async function discoverSkills() {
 
     for (const child of children) {
       if (shouldSkipEntry(child)) continue;
+      if (isSharedCategoryEntry(child.name)) continue;
       const childPath = path.join(entryPath, child.name);
 
       if (!(await hasSkillMd(childPath))) {
@@ -124,6 +139,7 @@ export async function discoverSkills() {
         name: child.name,
         sourcePath: childPath,
         category: entry.name,
+        categoryPath: entryPath,
       });
     }
 
@@ -238,11 +254,61 @@ export async function writeManifest(skills) {
   await fs.writeFile(MANIFEST_PATH, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
 }
 
-async function copySkillDir(sourcePath, destDir, skillName) {
+export function rewriteSharedReferenceLinks(content) {
+  return content.split(SHARED_REF_REWRITE_FROM).join(SHARED_REF_REWRITE_TO);
+}
+
+async function listFilesRecursive(dir) {
+  const files = [];
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const entryPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...(await listFilesRecursive(entryPath)));
+    } else if (entry.isFile()) {
+      files.push(entryPath);
+    }
+  }
+  return files;
+}
+
+async function rewriteSharedReferencesInTree(destPath) {
+  const files = await listFilesRecursive(destPath);
+  for (const filePath of files) {
+    const content = await fs.readFile(filePath, "utf8");
+    const rewritten = rewriteSharedReferenceLinks(content);
+    if (rewritten !== content) {
+      await fs.writeFile(filePath, rewritten, "utf8");
+    }
+  }
+}
+
+async function injectSharedCategoryDirs(categoryPath, destPath) {
+  if (!categoryPath) return;
+
+  const entries = await fs.readdir(categoryPath, { withFileTypes: true });
+  for (const entry of entries) {
+    if (!entry.isDirectory() || !isSharedCategoryEntry(entry.name)) continue;
+
+    const targetSubdir = entry.name.slice(SHARED_PREFIX.length);
+    if (!targetSubdir) {
+      fail(`Invalid shared category folder: ${entry.name}`);
+    }
+
+    const sharedSource = path.join(categoryPath, entry.name);
+    const sharedDest = path.join(destPath, targetSubdir);
+    await fs.mkdir(sharedDest, { recursive: true });
+    await fs.cp(sharedSource, sharedDest, { recursive: true });
+  }
+}
+
+export async function copySkillDir(sourcePath, destDir, skillName, categoryPath = null) {
   const destPath = path.join(destDir, skillName);
   await fs.rm(destPath, { recursive: true, force: true });
   await fs.mkdir(destDir, { recursive: true });
   await fs.cp(sourcePath, destPath, { recursive: true });
+  await injectSharedCategoryDirs(categoryPath, destPath);
+  await rewriteSharedReferencesInTree(destPath);
 }
 
 async function removeSkillFromDestinations(skillName, destinations) {
@@ -260,7 +326,7 @@ export async function syncSkills(skills, destinations) {
       fail(`Refusing to write to forbidden path: ${destDir}`);
     }
     for (const skill of skills) {
-      await copySkillDir(skill.sourcePath, destDir, skill.name);
+      await copySkillDir(skill.sourcePath, destDir, skill.name, skill.categoryPath);
     }
   }
 }

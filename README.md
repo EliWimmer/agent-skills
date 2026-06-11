@@ -7,18 +7,22 @@ Single source of truth for personal agent skills. Author skills here, then insta
 ```
 skills/
 ├── meta/
-│   └── create-skill/       # Authoring standards
-├── planning/
+│   └── author-new-skill/   # Authoring standards
+├── with-docs/
+│   ├── _shared_references/ # Injected into each skill's references/ at install
 │   ├── grill-with-docs/
-│   ├── exploration-phased-plan/
-│   └── implement-plan/
+│   ├── author-skill-with-docs/  # family authoring standards
+│   └── …                   # other *-with-docs skills
+├── planning/
+│   └── planning-docs/      # read-before-code contract
 └── <category>/<skill>/     # or skills/<skill>/ at repo root
     └── SKILL.md
+deprecated/                 # Retired skills (not synced); see deprecated/README.md
 manifest.json               # Skills last deployed by install (committed)
 scripts/                    # sync / install / uninstall
 ```
 
-Allowed paths: `skills/<skill>/` or `skills/<category>/<skill>/` only.
+Allowed install paths: `skills/<skill>/` or `skills/<category>/<skill>/` only.
 
 ## Requirements
 
@@ -61,8 +65,9 @@ Each command copies skills (flat, by folder name) to:
 | Path |
 |------|
 | `~/.agents/skills/` |
-| `~/.cursor/skills/` |
 | `~/.claude/skills/` |
+| `~/.codex/skills/` |
+| `~/.cursor/skills/` |
 | `~/.gemini/skills/` |
 
 `~/.cursor/skills-cursor/` is never touched (Cursor-managed built-ins).

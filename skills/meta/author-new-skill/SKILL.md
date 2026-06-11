@@ -14,11 +14,22 @@ skills/<skill-name>/SKILL.md
 skills/<category>/<skill-name>/SKILL.md
 ```
 
-- **Category folders** (e.g. `planning/`, `meta/`) are for navigation only; install flattens to `<skill-name>/` in each tool directory.
+- **Category folders** (e.g. `planning/`, `with-docs/`, `meta/`) are for navigation only; install flattens to `<skill-name>/` in each tool directory.
 - **Skill folder names** must be unique across the entire tree (no duplicate leaf names in different categories).
 - At most **one** category level; no `skills/a/b/c/` skill paths.
+- **`_shared_<subdir>/`** folders inside a category (e.g. `skills/with-docs/_shared_references/`) are not skills. Install merges each `_shared_<subdir>/` into every skill's `<subdir>/` in the destination and rewrites `../_shared_<subdir>/` links to `./<subdir>/` in all copied files. Discovery skips `_`-prefixed category entries.
 
 After authoring, run `scripts/install.sh` (or `install.ps1`) from the repo root to deploy and update `manifest.json`.
+
+For **`*-with-docs`** skills under `skills/with-docs/`, follow [author-skill-with-docs](../with-docs/author-skill-with-docs/SKILL.md) — shared references, read-docs contract, and cross-link rules.
+
+## Deprecating a skill
+
+1. Move `skills/.../<skill-name>/` to `deprecated/<skill-name>/` (outside `skills/`).
+2. Update the skill `description` to name the successor.
+3. **Keep the name in `manifest.json`** until `./scripts/install.sh` runs — install removes destinations for manifest skills absent from `skills/`, then drops them from the manifest. Do not delete manifest entries by hand.
+
+See [deprecated/README.md](../../deprecated/README.md).
 
 ## Required files
 

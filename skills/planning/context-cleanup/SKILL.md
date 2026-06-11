@@ -3,7 +3,7 @@ name: context-cleanup
 description: Migrates monolithic or scattered CONTEXT.md files into docs/context/ layout. Use when invoked explicitly (/context-cleanup), when a repo has a root or nested CONTEXT.md outside docs/context/, or when grill-with-docs recommends consolidating an oversized glossary.
 ---
 
-Reorganize legacy context documentation into the `docs/context/` layout used by [grill-with-docs](../grill-with-docs/SKILL.md). This skill moves and splits existing content — it does not invent domain definitions.
+Reorganize legacy context documentation into the `docs/context/` layout used by [grill-with-docs](../with-docs/grill-with-docs/SKILL.md). This skill moves and splits existing content — it does not invent domain definitions.
 
 ## Target layout
 
@@ -16,7 +16,7 @@ docs/context/
 └── ...
 ```
 
-See [CONTEXT-FORMAT.md](../grill-with-docs/CONTEXT-FORMAT.md) for glossary structure, naming, and cross-linking rules.
+See [CONTEXT-FORMAT.md](../with-docs/_shared_references/CONTEXT-FORMAT.md) for glossary structure, naming, and cross-linking rules.
 
 ## Legacy locations to find
 
@@ -51,4 +51,4 @@ See [CONTEXT-FORMAT.md](../grill-with-docs/CONTEXT-FORMAT.md) for glossary struc
 
 ## After cleanup
 
-Recommend a [grill-with-docs](../grill-with-docs/SKILL.md) session for any terms flagged as ambiguous during the split, rather than resolving them during cleanup.
+Recommend a [grill-with-docs](../with-docs/grill-with-docs/SKILL.md) session for any terms flagged as ambiguous during the split, rather than resolving them during cleanup.
