@@ -17,7 +17,7 @@ An optional single subdirectory directly under `skills/` that groups related ski
 The leaf directory name under `skills/` (e.g. `grill-with-docs`). Must be unique across the entire source tree; duplicate leaf names under different category folders are invalid. Must match the `name` field in that skill's `SKILL.md` frontmatter; install and sync fail if they differ.
 
 **Install destination**:
-A personal, global skills directory on the machine (under the user home directory) where synced skills appear as sibling folders. Project-local paths (e.g. `.cursor/skills/`) are out of scope for v1. Default targets: `~/.agents/skills/`, `~/.claude/skills/`, `~/.codex/skills/`, `~/.cursor/skills/`, and `~/.gemini/skills/`. Never write to `~/.cursor/skills-cursor/`.
+A personal, global skills directory on the machine (under the user home directory) where synced skills appear as sibling folders. Project-local paths (e.g. `.cursor/skills/`) are out of scope for v1. Default targets: `~/.agents/skills/`, `~/.claude/skills/`, `~/.cursor/skills/`, and `~/.gemini/config/skills/` (Codex reads from `~/.agents/skills/`, so no separate `.codex` target is needed). Never write to `~/.cursor/skills-cursor/`.
 
 **Sync**:
 Copying skill directories from the source tree into one or more install destinations, replacing each destination skill folder wholesale if it already exists. Sync never deletes destination folders for skills absent from the source tree (other tools may share the same install directories), and does not read or write `manifest.json`. Uses the same validation rules as **Install** before copying.

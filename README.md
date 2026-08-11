@@ -66,9 +66,8 @@ Each command copies skills (flat, by folder name) to:
 |------|
 | `~/.agents/skills/` |
 | `~/.claude/skills/` |
-| `~/.codex/skills/` |
 | `~/.cursor/skills/` |
-| `~/.gemini/skills/` |
+| `~/.gemini/config/skills/` |
 
 `~/.cursor/skills-cursor/` is never touched (Cursor-managed built-ins).
 

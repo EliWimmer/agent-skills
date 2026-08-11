@@ -1,9 +1,10 @@
 ---
 name: good-commit
 description: For committing changes to git. Use when the user asks you to commit your work or commit your changes.
+disable-model-invocation: true
 ---
 
-Stage and commit your changes to the current branch. Only stage files you changed in this agent session. Never push to the remote. Never create a pull request. Never create a new branch.
+Stage and commit your changes to the current branch. Only stage files you changed in this agent session. If this is a fresh session, look at recent threads for context. Never push to the remote. Never create a pull request. Never create a new branch.
 
 ## One commit or several?
 

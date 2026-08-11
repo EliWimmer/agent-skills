@@ -52,16 +52,30 @@ _Avoid_: Duplicating DOMAIN-AWARENESS or CONTEXT-FORMAT prose inside each SKILL.
 Creating a new sub-context glossary file and CONTEXT-MAP entry when a cluster of terms clearly belongs in a separate bounded context during a grill, fix, or planning session.
 _Avoid_: "Mid-grill split" as a separate concept — same operation.
 
+**Maintenance pass**:
+A bounded review and cleanup of a mature doc graph that verifies current claims, distills durable knowledge into its canonical owner, repairs stale references, and removes or archives irrelevant material.
+_Avoid_: Treating maintenance as another audit artifact when the intended output is cleaner source documentation.
+
+**Compaction pass**:
+A three-subagent rewrite of ADRs and glossaries that removes trivial, obvious, and redundant prose while preserving durable decisions, canonical terms, and doc-graph links.
+_Avoid_: Using compaction to change decisions, refresh the whole doc graph, or erase unique rationale.
+
 ## Relationships
 
 - The **with-docs category** contains doc-aware workflow skills that share **shared references** and read the **doc graph** before acting; **author-skill-with-docs** documents how to add new family members
 - **plan-with-docs** writes plans; **implement-with-docs** updates the matching **progress file** by **phase**
 - **audit-with-docs** writes **audits**; **fix-with-docs** and **planning-docs** should read overlapping **audits** before changing code
+- **compact-with-docs** performs a **compaction pass** over ADRs and glossaries; **maintain-with-docs** owns broader verification, merging, archiving, and deletion across the full graph
+- **maintain-with-docs** performs a **maintenance pass** over an established **doc graph** and may update every artifact family without inventing a new artifact type
 - An **active glossary** is chosen from **bounded context** entries in CONTEXT-MAP
 
 ## Related
 
 - [author-skill-with-docs](../../../skills/with-docs/author-skill-with-docs/SKILL.md) — how to author new family skills in this repo
+- [compact-with-docs](../../../skills/with-docs/compact-with-docs/SKILL.md) — compacts ADR and glossary prose through three specialized subagents
+- [include-with-docs](../../../skills/with-docs/include-with-docs/SKILL.md) — primes with-docs system context for a session; base layer for the rest of the family
+- [init-with-docs](../../../skills/with-docs/init-with-docs/SKILL.md) — bootstraps this docs/context structure for a repo that has none
+- [maintain-with-docs](../../../skills/with-docs/maintain-with-docs/SKILL.md) — distills, refreshes, and prunes an established doc graph
 - [CONTEXT-FORMAT.md](../../../skills/with-docs/_shared_references/CONTEXT-FORMAT.md) — glossary file structure and CONTEXT-MAP section order
 - [ADR-0001: with-docs family](../../adr/0001-with-docs-family-and-shared-references.md)
 - [`*-with-docs` skill-set audit](../../audits/2026_06_11-with-docs-skill-set.md)

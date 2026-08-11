@@ -13,9 +13,8 @@ const MANIFEST_PATH = path.join(REPO_ROOT, "manifest.json");
 const DESTINATION_DIRS = [
   ".agents/skills",
   ".claude/skills",
-  ".codex/skills",
   ".cursor/skills",
-  ".gemini/skills",
+  ".gemini/config/skills",
 ];
 
 const FORBIDDEN_DEST = ".cursor/skills-cursor";

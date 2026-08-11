@@ -1,0 +1,6 @@
+interface:
+  display_name: "Compact with docs"
+  short_description: "Shrink ADRs and glossaries without losing meaning"
+  icon_small: "./assets/icon.svg"
+  icon_large: "./assets/icon.svg"
+  default_prompt: "Use $compact-with-docs to compact project ADRs and glossaries through three subagents while preserving durable decisions and canonical language."

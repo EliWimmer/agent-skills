@@ -1,6 +1,7 @@
 ---
 name: author-new-skill
 description: Documents standards for authoring skills in this repository and when to create or update a skill. Use when creating a new skill, editing SKILL.md frontmatter, or asking how skills should be structured in the agent-skills source repo.
+disable-model-invocation: true
 ---
 
 # Authoring a skill
@@ -92,4 +93,3 @@ Write for discovery, not marketing:
 2. Add `SKILL.md` with matching `name` and a strong `description`
 3. Run `./scripts/install.sh` and commit `manifest.json` with your changes
 4. Invoke the skill in your agent to verify discovery
-

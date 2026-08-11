@@ -1,7 +1,10 @@
 ---
 name: svelte-boundary
 description: >
-  An explanation of the Svelte 5 `<svelte:boundary>` element and how to use it effectively. Use whenever the user mentions svelte boundary, <svelte:boundary>, or error handling in the template.
+  Instructions for using the Svelte 5 `<svelte:boundary>` element and how to use it effectively. Use when implementing or refactoring components that use boundaries, `<svelte:boundary>...</svelte:boundary>`, error handling in the template, or when the user mentions svelte boundary.
+paths:
+  - "**/*.svelte"
+  - "**/*.svelte.**"
 ---
 
 ```svelte
