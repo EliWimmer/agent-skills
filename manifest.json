@@ -1,26 +1,14 @@
 {
   "version": 1,
   "skills": [
-    "ask-matt",
+    "ask-with-docs",
     "author-new-skill",
-    "code-review",
-    "codebase-design",
-    "diagnosing-bugs",
     "domain-modeling",
-    "fallow",
-    "fallow-review",
+    "fix-with-docs",
     "good-commit",
-    "grill-me",
     "grill-with-docs",
     "grilling",
-    "handoff",
     "humanizer",
-    "implement",
-    "improve-codebase-architecture",
-    "prototype",
-    "research",
-    "resolving-merge-conflicts",
-    "setup-matt-pocock-skills",
     "svelte-attachments",
     "svelte-boundary",
     "svelte-context",
@@ -29,13 +17,6 @@
     "svelte-module-classes",
     "svelte-snippets",
     "svelte-tailwind-4",
-    "tdd",
-    "teach",
-    "to-spec",
-    "to-tickets",
-    "triage",
-    "wayfinder",
-    "worktree-finalize",
-    "writing-great-skills"
+    "worktree-finalize"
   ]
 }

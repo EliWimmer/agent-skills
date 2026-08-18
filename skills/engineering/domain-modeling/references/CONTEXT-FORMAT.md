@@ -83,7 +83,7 @@ Create when a second bounded context emerges (or during mid-session split). Live
 **Optional index sections** (after **Relationships**, in this order when present):
 
 1. **Plans** — links to `docs/plans/<slug>.md`
-2. **Audits** — links to `docs/audits/<slug>.md`
+2. **Artifacts** — links to `docs/artifacts/<slug>.md`
 3. **Research** — links to `docs/research/<slug>.md`
 
 One-line descriptions and relative links only; do not duplicate document bodies.
