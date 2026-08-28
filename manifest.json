@@ -3,12 +3,16 @@
   "skills": [
     "ask-with-docs",
     "author-new-skill",
+    "document-process",
     "domain-modeling",
     "fix-with-docs",
     "good-commit",
     "grill-with-docs",
     "grilling",
     "humanizer",
+    "research-with-docs",
+    "setup-domain-modeling",
+    "svelte",
     "svelte-attachments",
     "svelte-boundary",
     "svelte-context",
@@ -17,6 +21,8 @@
     "svelte-module-classes",
     "svelte-snippets",
     "svelte-tailwind-4",
-    "worktree-finalize"
+    "unslop",
+    "worktree-finalize",
+    "writing-great-skills"
   ]
 }

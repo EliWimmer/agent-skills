@@ -1,0 +1,5 @@
+interface:
+  display_name: "Research with Docs"
+  short_description: "Research a project and write an evidence-backed report"
+policy:
+  allow_implicit_invocation: false

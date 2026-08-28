@@ -25,6 +25,8 @@ docs/
 │   ├── <slug>.md
 │   └── progress/
 │       └── <slug>-progress.md
+├── processes/
+│   └── <slug>.md
 └── research/
     └── YYYY_MM_DD-<slug>.md
 ```
@@ -32,6 +34,8 @@ docs/
 If a `CONTEXT-MAP.md` exists in `/docs/context`, the repo has multiple contexts. The map points to where each one lives:
 
 Create files lazily — only when you have something to write. If no `CONTEXT.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.
+
+Use `docs/processes/` for repeatable operational instructions such as releases, migrations, and incident response. Process documents may contain implementation details; keep domain definitions in `docs/context/`.
 
 ## During the session
 
