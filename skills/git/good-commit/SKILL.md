@@ -69,4 +69,4 @@ Write for developers maintaining the repo.
 - `[test] Add install manifest orphan tests`
 - `[chore] Update manifest after skill install`
 
-See [commit prefixes](../../../docs/context/git/commit-prefixes.md) for canonical definitions.
+See [commit prefixes](docs/context/git/commit-prefixes.md) for canonical definitions.

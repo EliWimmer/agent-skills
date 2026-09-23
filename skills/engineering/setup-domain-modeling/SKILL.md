@@ -1,12 +1,12 @@
 ---
 name: setup-domain-modeling
-description: Bootstraps a project's domain model through codebase discovery, parallel domain research, and an agreed interactive baseline.
+description: Bootstraps a project's domain model through codebase discovery, parallel domain research, an agreed interactive baseline, and AGENTS.md pointers.
 disable-model-invocation: true
 ---
 
 # Set Up Domain Modeling
 
-Establish the project's first trustworthy domain baseline. Use `/domain-modeling` for every glossary, context-map, and ADR change. Use `/grilling` for the interactive phase.
+Establish the project's first trustworthy domain baseline. Use `/domain-modeling` for every glossary, context-map, and ADR change. Use `/grilling` for the interactive phase. After the baseline is agreed, point the repo-root `AGENTS.md` at that model.
 
 ## 1. Discover the domain landscape
 
@@ -65,4 +65,18 @@ Continue until every high-impact branch in the decision tree is resolved and doc
 
 Re-read the resulting model against the repository and all expedition reports. Verify that every top-level domain is mapped, every mapped context has owned language, every important relationship has a direction, glossary definitions contain product meaning rather than implementation detail, links resolve, and remaining uncertainties are clearly separated from agreed knowledge.
 
-Report the resulting contexts, files, resolved ambiguities, and any low-impact open questions. The setup is complete only when the audit passes and the user's final agreement is recorded.
+Report the resulting contexts, files, resolved ambiguities, and any low-impact open questions. This phase is complete when the audit passes and the user's final agreement is recorded.
+
+## 6. Point AGENTS.md at the model
+
+Create `AGENTS.md` at the repo root if it does not exist. If it already exists, add a short section. Do not replace unrelated project instructions.
+
+Tell agents to:
+
+- read `docs/context/CONTEXT-MAP.md` when it exists, otherwise `docs/context/CONTEXT.md`
+- use `/domain-modeling` when language or decisions change
+- use `/ask-with-docs`, `/fix-with-docs`, `/grill-with-docs`, `/research-with-docs`, and `/document-process` for the matching jobs
+
+Keep it a pointer. Do not copy glossary text. Verify the links resolve.
+
+The setup is complete when the audit has passed, the user's final agreement is recorded, and `AGENTS.md` points at the model.

@@ -58,5 +58,5 @@ _Avoid_: `[docs]` for documentation; `[refactor]` for application code moves.
 
 ## Related
 
-- [Agent Skills (source repo)](../CONTEXT.md) — repo-wide skill and sync vocabulary
-- `skills/git/good-commit/SKILL.md` — workflow that applies these prefixes
+- [Skill source](../skill-source/skill-source.md) — catalog and installer
+- [good-commit](../../../skills/git/good-commit/SKILL.md) — workflow that applies these prefixes
