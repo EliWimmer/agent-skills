@@ -1,0 +1,26 @@
+{
+  "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json",
+  "schemaVersion": 1,
+  "actions": {
+    "install-skills": {
+      "type": "command",
+      "title": "Install Skills",
+      "subtitle": "Sync the catalog, prune orphans, and rewrite the install manifest",
+      "keywords": ["install", "sync", "skills", "manifest"],
+      "command": "cd \"$(git rev-parse --show-toplevel)\" && ./scripts/install.sh",
+      "target": "newTabInCurrentPane",
+      "icon": { "type": "symbol", "name": "square.and.arrow.down" }
+    }
+  },
+  "ui": {
+    "surfaceTabBar": {
+      "buttons": [
+        "install-skills",
+        "cmux.newTerminal",
+        "cmux.newBrowser",
+        "cmux.splitRight",
+        "cmux.splitDown"
+      ]
+    }
+  }
+}
