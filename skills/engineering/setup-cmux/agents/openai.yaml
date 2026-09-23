@@ -1,0 +1,5 @@
+interface:
+  display_name: "Set Up cmux"
+  short_description: "Configure project-local .cmux workspace and Dock"
+policy:
+  allow_implicit_invocation: false
