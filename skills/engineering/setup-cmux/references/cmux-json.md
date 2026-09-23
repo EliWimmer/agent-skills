@@ -24,7 +24,7 @@ Project files may set `actions`, `commands`, `ui`, `notifications.hooks`, `notif
 
 | Type | What it does |
 | --- | --- |
-| `builtin` | Alias a built-in: `cmux.newTerminal`, `cmux.newBrowser`, `cmux.splitRight`, `cmux.splitDown`. |
+| `builtin` | Alias a built-in action ID. Full list: [built-in-commands.md](built-in-commands.md). |
 | `command` | Run shell text. `target` is `currentTerminal` or `newTabInCurrentPane` (default). |
 | `agent` | Start a coding agent CLI in a new tab. Any binary name works. |
 | `workspaceCommand` | Run a named entry from `commands`. |
@@ -91,7 +91,7 @@ cwd resolution: `.` or omitted uses the workspace cwd, `./subdir` is relative to
 
 ## UI wiring
 
-`ui.surfaceTabBar.buttons` is a list of action IDs or button objects:
+`ui.surfaceTabBar.buttons` is a list of action IDs or button objects. Put project actions first, then the built-ins. Always.
 
 ```json
 {
@@ -220,13 +220,13 @@ More than a tab-bar of scripts. This is the shape to aim for.
     "newWorkspace": { "action": "dev-layout" },
     "surfaceTabBar": {
       "buttons": [
+        "dev-layout",
+        "test",
+        "clean",
         "cmux.newTerminal",
         "cmux.newBrowser",
         "cmux.splitRight",
-        "cmux.splitDown",
-        "dev-layout",
-        "test",
-        "clean"
+        "cmux.splitDown"
       ]
     }
   },

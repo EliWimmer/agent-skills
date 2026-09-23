@@ -17,7 +17,7 @@ Run `cmux docs custom-commands` and `cmux docs dock` if the CLI is available. If
 - https://cmux.com/docs/dock
 - https://cmux.com/docs/configuration
 
-Treat those pages as current. This skill's field lists are a fallback.
+Treat those pages as current. This skill's field lists are a fallback. Built-in action IDs live in [built-in-commands.md](references/built-in-commands.md). If that file and the live `CmuxSurfaceTabBarBuiltInAction` enum disagree, use the enum.
 
 This step is complete when the action types, layout tree, and Dock fields match the live docs.
 
@@ -57,10 +57,10 @@ A complete project file usually has all four:
 
 1. **Workspace layout.** One `workspace` action, or a `commands` entry plus a `workspaceCommand` action, for the primary loop. Typical shape: app terminal, optional second process, optional browser preview. Set `ui.newWorkspace.action` to that layout when New Workspace should open it.
 2. **Command actions.** Frequent, safe scripts on the tab bar and in Command Palette. Destructive work (`clean`, `reset`, `migrate`) gets `"confirm": true`.
-3. **Tab-bar wiring.** `ui.surfaceTabBar.buttons` replaces the default list when present. Keep `cmux.splitRight` and `cmux.splitDown` unless the user wants them gone. Leave out a built-in ID to hide it.
+3. **Tab-bar wiring.** `ui.surfaceTabBar.buttons` replaces the default list when present. Put project actions first, then the built-ins. Always. Keep `cmux.splitRight` and `cmux.splitDown` unless the user wants them gone. Leave out a built-in ID to hide it.
 4. **Palette commands.** Extra `commands` entries for tests, generate, or one-shot chores that do not need a button.
 
-Read [cmux-json.md](references/cmux-json.md) before writing actions, layouts, or UI wiring.
+Read [cmux-json.md](references/cmux-json.md) before writing actions, layouts, or UI wiring. Read [built-in-commands.md](references/built-in-commands.md) before wiring tab-bar or plus-button IDs.
 
 Portable commands only. Resolve the repo with `git rev-parse --show-toplevel` or a relative `cwd`. Never write a machine home path such as `/Users/...`. Never put secrets in the file.
 
