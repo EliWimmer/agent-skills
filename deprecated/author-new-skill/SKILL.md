@@ -1,6 +1,6 @@
 ---
 name: author-new-skill
-description: Documents standards for authoring skills in this repository and when to create or update a skill. Use when creating a new skill, editing SKILL.md frontmatter, or asking how skills should be structured in the agent-skills source repo.
+description: Deprecated. Use create-new-global-skill for this repository's global catalog, or create-new-skill for a project-local skill.
 disable-model-invocation: true
 ---
 

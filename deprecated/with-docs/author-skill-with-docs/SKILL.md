@@ -9,7 +9,7 @@ argument-hint: "Skill name or authoring task"
 
 Standards for adding or extending skills in the `*-with-docs` family in **this repository** (`agent-skills`). These skills run against **target projects** that use `docs/`; this skill governs how the skill source is written here.
 
-For general skill authoring (any category), see [author-new-skill](../../meta/author-new-skill/SKILL.md). For planning-doc vocabulary, see [planning doc-system glossary](../../../docs/context/planning-doc-system/glossary.md).
+For general skill authoring in this repository, see [create-new-global-skill](../../../.agents/skills/create-new-global-skill/SKILL.md). For project-local skill authoring, see [create-new-skill](../../../skills/meta/create-new-skill/SKILL.md). For planning-doc vocabulary, see [planning doc-system glossary](../../../docs/context/planning-doc-system/glossary.md).
 
 ## When to create vs extend
 

@@ -36,9 +36,13 @@ _Avoid_: sync
 Removal of this repository's deployed skills from install destinations, by name or as orphans.
 _Avoid_: delete from the source tree
 
-**Author-new-skill**:
-The skill that documents how to author skills for this repository.
-_Avoid_: create-skill, author-skill
+**Create-new-global-skill**:
+The repository-local skill under `.agents/skills/` that documents how to author skills in this repository's global catalog. It is not part of the **Skill source tree** and is not deployed by **Install**.
+_Avoid_: author-new-skill
+
+**Create-new-skill**:
+The skill that documents how to author a project-local skill in an individual repository.
+_Avoid_: skill catalog authoring
 
 **Deprecated skill**:
 A skill moved out of the skill source tree to `deprecated/`. Not synced.
@@ -55,7 +59,8 @@ _Avoid_: stale install, leftover
 - **Install destinations** are personal and global, not per-project checkouts
 - **Install** is **Sync** plus **Orphan** cleanup via the **Install manifest**
 - Only names on the **Install manifest** may be removed from an **Install destination**
-- **Author-new-skill** is a **Skill** in the **Skill source tree**, same as any other
+- **Create-new-global-skill** is repo-local guidance, outside the **Skill source tree** and **Install manifest**
+- **Create-new-skill** guides the authoring of a project-local **Skill** in its host repository
 - A **Deprecated skill** is not in the **Skill source tree** and is not copied by **Sync**
 - A **Deprecated skill** that remains on the **Install manifest** is an **Orphan** until **Install** or **Uninstall** runs
 - Deprecating a skill leaves its name on the **Install manifest**. Do not edit the manifest by hand
@@ -77,12 +82,12 @@ _Avoid_: stale install, leftover
 > **Dev:** "Can I move it back under `skills/` later?"
 > **Maintainer:** "Yes, same folder name, if nothing else took it. The next install deploys it again."
 
-> **Dev:** "I renamed `author-skill` to `author-new-skill`. Do I edit the manifest to swap the names?"
-> **Maintainer:** "No. Leave the old name. Install will orphan it and add the new one when it rewrites the manifest."
+> **Dev:** "I moved `create-new-global-skill` into `.agents/skills/`. Will catalog install keep deploying it?"
+> **Maintainer:** "No. Install only discovers `skills/`. It removes the old deployed copies as an orphan and drops the name from the manifest."
 
 ## Flagged ambiguities
 
-- The authoring skill was called create-skill, author-skill, and author-new-skill. Resolved: **Author-new-skill**.
+- **Create-new-global-skill** documents the global catalog's rules but lives locally in this repository. **Create-new-skill** guides project-local skill authoring in general.
 - A skill taken out of the live catalog was called retired, archived, or deleted. Resolved: **Deprecated skill**.
 - A leftover destination copy after a skill left the source tree. Resolved: **Orphan**. Only names on this repo's **Install manifest** qualify.
 - Sync script named the Node wrappers. Resolved: implementation, not product language.

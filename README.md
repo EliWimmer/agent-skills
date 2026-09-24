@@ -1,13 +1,13 @@
 # agent-skills
 
-Single source of truth for personal agent skills. Author skills here, then install them to tool-specific directories on your machine.
+Catalog of personal agent skills. Author catalog skills here, then install them to tool-specific directories on your machine. Repo-local agent guidance lives under `.agents/skills/`.
 
 ## Layout
 
 ```
 skills/
 ├── meta/
-│   └── author-new-skill/   # Authoring standards
+│   └── create-new-skill/        # Project-local skill authoring
 ├── with-docs/
 │   ├── _shared_references/ # Injected into each skill's references/ at install
 │   ├── grill-with-docs/
@@ -22,7 +22,15 @@ manifest.json               # Skills last deployed by install (committed)
 scripts/                    # sync / install / uninstall
 ```
 
+Repo-local guidance that is not installed with the catalog:
+
+```
+.agents/skills/
+└── create-new-global-skill/ # Authoring rules for this repo's global catalog
+```
+
 Allowed install paths: `skills/<skill>/` or `skills/<category>/<skill>/` only.
+The install scripts do not discover `.agents/skills/`.
 
 ## Requirements
 

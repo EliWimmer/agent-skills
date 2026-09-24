@@ -2,7 +2,8 @@
   "version": 1,
   "skills": [
     "ask-with-docs",
-    "author-new-skill",
+    "cmux-browser",
+    "create-new-skill",
     "document-process",
     "domain-modeling",
     "fix-with-docs",

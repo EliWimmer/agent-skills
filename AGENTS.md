@@ -6,11 +6,12 @@ Personal source of truth for authoring skills and installing them to global tool
 
 - [docs/context/CONTEXT-MAP.md](docs/context/CONTEXT-MAP.md) — contexts and how they relate
 - [Skill source](docs/context/skill-source/skill-source.md) — catalog, install, deprecate, orphan
-- [Author-new-skill](skills/meta/author-new-skill/SKILL.md) — how to write a skill in this repo
+- [Create-new-global-skill](.agents/skills/create-new-global-skill/SKILL.md) — how to write a skill for this repo's global catalog
+- [Create-new-skill](skills/meta/create-new-skill/SKILL.md) — how to write a project-local skill
 
 ## Work in this repo
 
-Author under `skills/`, then `./scripts/install.sh`. `deprecated/` is not live. Leave the install manifest alone when deprecating. The next install prunes orphans.
+For catalog skills, author under `skills/`, then run `./scripts/install.sh`. Repo-local guidance under `.agents/skills/` stays in this checkout and is not installed by the catalog. `deprecated/` is not live. Leave the install manifest alone when deprecating. The next install prunes orphans.
 
 Use `domain-modeling` when language or decisions change. Use `ask-with-docs`, `fix-with-docs`, `grill-with-docs`, `research-with-docs`, and `document-process` for the matching jobs.
 
