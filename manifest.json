@@ -2,6 +2,7 @@
   "version": 1,
   "skills": [
     "ask-with-docs",
+    "brainstorming",
     "cmux-browser",
     "cmux-computer-use",
     "create-new-skill",
@@ -26,6 +27,7 @@
     "svelte-tailwind-4",
     "unslop",
     "worktree-finalize",
-    "writing-great-skills"
+    "writing-great-skills",
+    "writing-plans"
   ]
 }

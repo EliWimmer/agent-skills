@@ -13,7 +13,7 @@ Personal source of truth for authoring skills and installing them to global tool
 
 For catalog skills, author under `skills/`, then run `./scripts/install.sh`. Repo-local guidance under `.agents/skills/` stays in this checkout and is not installed by the catalog. `deprecated/` is not live. Leave the install manifest alone when deprecating. The next install prunes orphans.
 
-Use `domain-modeling` when language or decisions change. Use `ask-with-docs`, `fix-with-docs`, `grill-with-docs`, `research-with-docs`, and `document-process` for the matching jobs.
+Use `domain-modeling` when language or decisions change. Use `ask-with-docs`, `fix-with-docs`, `grill-with-docs`, `research-with-docs`, `document-process`, `brainstorming`, and `writing-plans` for the matching jobs.
 
 ## Do not
 

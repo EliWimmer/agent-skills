@@ -22,9 +22,11 @@ docs/
 │       └── <slug>.md
 ├── adr/
 ├── plans/
-│   ├── <slug>.md
-│   └── progress/
-│       └── <slug>-progress.md
+│   ├── prospective/<slug>.md   ← see Plan lifecycle
+│   ├── planned/<slug>.md
+│   ├── in-progress/<slug>.md
+│   ├── complete/<slug>.md
+│   └── archived/<slug>.md
 ├── processes/
 │   └── <slug>.md
 └── research/
@@ -36,6 +38,20 @@ If a `CONTEXT-MAP.md` exists in `/docs/context`, the repo has multiple contexts.
 Create files lazily — only when you have something to write. If no `CONTEXT.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.
 
 Use `docs/processes/` for repeatable operational instructions such as releases, migrations, and incident response. Process documents may contain implementation details; keep domain definitions in `docs/context/`.
+
+### Plan lifecycle
+
+A plan's directory is its status. When the status changes, move the file with `git mv`, keep its slug, and update every link to it, including the **Plans** index in `CONTEXT-MAP.md`.
+
+| Directory | Status |
+| --- | --- |
+| `prospective/` | A design worth keeping that nobody has committed to building. It may have no tasks yet. |
+| `planned/` | Committed work with tasks written by `/writing-plans`. Not started. |
+| `in-progress/` | Being implemented. Tick each task's checkboxes as it's done. |
+| `complete/` | Every task ticked and verified. |
+| `archived/` | Abandoned or superseded. Add a line under the title saying why, linking the successor if there is one. |
+
+Progress lives in the plan's checkboxes. Promoting a `prospective/` plan to `planned/` means running `/writing-plans` on it. Create each status directory when the first plan needs it.
 
 ## During the session
 
