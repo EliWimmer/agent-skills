@@ -1,132 +1,85 @@
 ---
 name: writing-plans
-description: Writes a task-by-task implementation plan under docs/plans before code is touched. Use when there is an approved design or requirements for multi-step work, when promoting a prospective plan, or when another skill needs a plan written.
+description: Turn an approved design into ordered implementation tasks in its plan file under docs/plans.
 disable-model-invocation: true
 ---
 
 # Writing plans
 
-Write the implementation plan for an approved design, using the `/domain-modeling` skill for project terms and for the plan lifecycle. Write for an engineer who is skilled but knows nothing about this codebase, its toolset, or its domain, and who is weak at test design. Give them every file, command, and piece of code they need as small tasks. DRY, YAGNI, test-first, frequent commits.
+Turn an approved design into tasks an implementer can carry out with the repo and the plan and nothing else. Every decision gets made here, so implementing is a matter of following the tasks in order.
 
-## 1. Locate the plan file
+## 1. Locate the design
 
-The plan is one file at `docs/plans/<status>/<slug>.md`. Pick the case that applies:
+The input is a plan file under `docs/plans/` holding a design the user approved, usually written by `/brainstorming`. If the design was agreed in this conversation instead, save it to `docs/plans/planned/<slug>.md` first with its goal, approach, and out-of-scope list. With no approved design at all, tell the user the work needs `/brainstorming` and stop there.
 
-- **Handed off from `/brainstorming`**: the file already holds the design, in the status directory the user chose. Add the tasks to it.
-- **Promoting a prospective plan**: `git mv` it from `prospective/` to `planned/`, then add the tasks.
-- **Starting from requirements**: create the file in `planned/`, or in `in-progress/` when the user wants work to start right away. Write a short **Goal** and **Approach** first.
+A plan in `prospective/` moves to `planned/` as part of this run. Status directories and moves follow the plan lifecycle in `/domain-modeling`.
 
-Read the design, the governing context in `docs/context/` and `docs/adr/`, and the code the work touches. If the design covers several independent subsystems, suggest one plan per subsystem, each producing working, testable software on its own.
+This step is complete when you hold one plan file with an approved design and know whether the user wants it reviewed first (planned) or started now (in-progress).
 
-This step is complete when the file is in the right status directory and you can name every file the design touches.
+## 2. Ground the design in the code
 
-## 2. Map the files
+Read every file the design touches, plus one existing example of each kind of thing it adds: a neighbouring endpoint, command, migration, or test. The plan names real paths and real symbols, and points at the example to mirror.
 
-List each file to create or modify and what it's responsible for. This is where you lock in how the work divides up:
+Find the **checks** the project already uses on itself: its test command and its native checks such as typecheck, lint, and build. Look in package scripts, the Makefile, CI config, and the repository instructions. In a project with no test suite, the checks are whatever it does have: a build, a validator, a dry run.
 
-- Each file has one responsibility and a clear interface. Prefer small, focused files.
-- Files that change together live together. Split by responsibility, not by technical layer.
-- In an existing codebase, follow its patterns. Split a file you're modifying only when it has grown unwieldy.
+When the code contradicts the design, or the design leaves open a decision that tasks depend on, settle it with the user before writing tasks: one question per message, each with your recommended answer. Write the answer into the plan's design sections so the design stays true.
 
-This step is complete when every requirement in the design maps to at least one listed file.
+This step is complete when every path the plan will name is one you have opened or one the plan creates, the checks are known, and no task waits on an open decision.
 
-## 3. Write the tasks
+## 3. Slice the work
 
-A task is the smallest unit that has its own test cycle and could be rejected by a reviewer while its neighbor is approved. Fold setup, config, and docs into the task whose deliverable needs them. Each task ends with something testable on its own.
+Lead with a tracer bullet: the thinnest slice that runs end to end through every layer the design touches. Later tasks widen it. Place the task carrying the most uncertainty as early as its dependencies allow, while the plan is still cheap to change.
 
-Each step inside a task is one action of 2–5 minutes: write the failing test, run it and watch it fail, write the minimal code, run it and watch it pass, commit.
+Size each task as one reviewable commit that leaves the checks passing. Order tasks so each builds only on the ones before it.
 
-Every step contains the actual content. A plan that contains any of these has failed:
+This step is complete when you have an ordered list of task outcomes and can say what works after each one.
 
-- "TBD", "TODO", "implement later", "fill in details"
-- "Add appropriate error handling", "add validation", "handle edge cases"
-- "Write tests for the above" without the test code
-- "Similar to Task N" (repeat the code, since tasks may be read out of order)
-- A step that says what to do without showing how, such as a code step with no code block
-- A type, function, or method that no task defines
+## 4. Write the tasks
 
-This step is complete when every file from step 2 appears in some task and every code step has its code.
+Add a `## Tasks` section to the plan, before **Out of scope**, using the template below. Use the project's canonical terms from `docs/context/`.
 
-## 4. Self-review
+Specify decisions exactly and leave the code to the implementer. Wherever two tasks or two systems meet, write the contract out literally: signatures, data shapes, schema, config keys, error behaviour, names. Describe what sits inside a boundary in a sentence. Each step is a single action naming what changes and where, listed in the order to do it.
 
-Re-read the design and check the plan against it. Fix problems inline as you find them.
+```md
+## Tasks
 
-1. **Coverage**: point to a task for each requirement in the design. Add a task for any gap.
-2. **Placeholders**: search for everything on the list in step 3.
-3. **Consistency**: names, signatures, and types used in later tasks match where earlier tasks defined them. `clearLayers()` in Task 3 and `clearFullLayers()` in Task 7 is a bug.
-4. **Review focus**: find the inputs or failure modes the design implies but no test exercises. List the five most likely to bite a real user in **Review focus**, and add each one's test to the task that owns the code. An empty list means you checked and found none.
+**Checks:** `<test command>`, `<typecheck, lint, build commands>`
 
-This step is complete when all four checks pass.
+### Task 1: <outcome in a phrase>
+
+<What works once this lands, and what it builds on.>
+
+**Files:** create `path/to/new.ts`; modify `path/to/existing.ts` (`symbolName`)
+**Contract:** <signatures, data shapes, and names other tasks rely on, written exactly>
+**Mirror:** `path/to/similar.ts`
+
+- [ ] <Implementation step>
+- [ ] <Implementation step>
+- [ ] Test: <high-risk boundary>: <the cases that prove it>
+- [ ] Checks pass
+```
+
+**Checks** is written once and every task's last box refers to it. Include **Contract** and **Mirror** when a task has them. Include the test step when the task crosses a high-risk boundary, as defined under Tests.
+
+This step is complete when every requirement in the design maps to a task or to **Out of scope**, every path, name, and signature is spelled the same everywhere it appears, and each step can be acted on with no further decision.
 
 ## 5. Hand off
 
-Link the plan and follow its status:
+- **Planned**: give the user the plan's path, ask them to review the tasks, and wait.
+- **Start now**, or the user approves a planned plan: move the plan to `in-progress/` if it isn't there, then execute it.
 
-- **`planned/`**: ask the user to review it, then wait. Apply requested changes and repeat step 4.
-- **`in-progress/`**: the user already asked to start, so begin with Task 1. Tick each step's checkbox as you finish it, and commit at the end of each task. When every task is ticked and verified, `git mv` the plan to `complete/` and update links to it.
+## Tests
 
-## Plan sections
+Tests go where a defect would be expensive and quiet: code that parses or validates input from outside the system, moves money or permissions, writes or migrates data, coordinates concurrent work, or encodes rules with enough branches to get wrong. Name the boundary in the task and list the few cases that would catch a real regression, typically the main path and the edge the design worried about. Test through the boundary's public interface, with real collaborators wherever they are cheap to run.
 
-Add these sections to the plan file, after the design sections and before **Out of scope** / **Related** when those exist:
+Everything else rides on the checks and the tests the project already has. Most tasks carry no test step, and that is the expected shape of a good plan.
 
-````md
-## Global constraints
+Within a task, the implementation steps come first and the test step follows, so the test is written against the interface that actually landed.
 
-<Project-wide requirements every task must respect: version floors, dependency limits, naming and copy rules, platform requirements. One per line, exact values copied from the design.>
+## Executing
 
-## Review focus
+Work the tasks in order. For each one, do its steps, run the checks, and tick each box as it's done. A task is done when its boxes are ticked and the checks pass. The plan is done when every task is.
 
-<Up to five inputs or failure modes, most likely first, each with the behavior a reasonable user would expect.>
+When the code turns out different from what a task assumed, update the plan and then continue, so the plan stays the record of what is being built. A change to the design itself goes to the user first.
 
-## File structure
-
-- `path/to/file.ts`: <responsibility>
-
-## Tasks
-
-Tick each step's checkbox as it's done.
-
-### Task 1: <Component name>
-
-**Files:**
-- Create: `exact/path/to/file.ts`
-- Modify: `exact/path/to/existing.ts:123-145`
-- Test: `exact/path/to/file.test.ts`
-
-**Interfaces:**
-- Consumes: <exact signatures used from earlier tasks>
-- Produces: <exact names, parameters, and return types later tasks rely on>
-
-- [ ] **Step 1: Write the failing test**
-
-```ts
-test('specific behavior', () => {
-  expect(fn(input)).toBe(expected);
-});
-```
-
-- [ ] **Step 2: Run it and confirm it fails**
-
-Run: `<exact test command>`
-Expected: FAIL with "<message>"
-
-- [ ] **Step 3: Write the minimal implementation**
-
-```ts
-export function fn(input: Input): Output {
-  return expected;
-}
-```
-
-- [ ] **Step 4: Run it and confirm it passes**
-
-Run: `<exact test command>`
-Expected: PASS
-
-- [ ] **Step 5: Commit**
-
-```bash
-git add <files>
-git commit -m "<message>"
-```
-````
+When the plan is done, move it to `complete/` and tell the user what was built and what the checks reported.

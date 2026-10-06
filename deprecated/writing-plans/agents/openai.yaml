@@ -1,3 +1,5 @@
 interface:
   display_name: "Writing Plans"
-  short_description: "Write a task-by-task implementation plan"
+  short_description: "Turn an approved design into implementation tasks"
+policy:
+  allow_implicit_invocation: false
