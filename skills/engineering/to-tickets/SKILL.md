@@ -28,7 +28,8 @@ Break the work into **tracer bullet** tickets.
 
 <vertical-slice-rules>
 
-- Each slice cuts a narrow but COMPLETE path through every layer (schema, API, UI, tests): vertical, NOT a horizontal slice of one layer
+- Each slice cuts a narrow but COMPLETE path through every layer (schema, API, UI): vertical, NOT a horizontal slice of one layer
+- A slice carries a test only when it crosses a risk boundary from the spec, and its ticket names which one
 - A completed slice is demoable or verifiable on its own
 - Each slice is sized to fit in a single fresh context window
 - Any prefactoring should be done first

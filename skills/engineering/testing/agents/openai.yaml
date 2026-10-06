@@ -1,0 +1,3 @@
+interface:
+  display_name: "Testing"
+  short_description: "Lean tests as guards at risk boundaries"
