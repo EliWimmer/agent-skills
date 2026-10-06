@@ -1,0 +1,5 @@
+interface:
+  display_name: "Set Up Domain Modeling"
+  short_description: "Discover and agree on a domain baseline"
+policy:
+  allow_implicit_invocation: false
