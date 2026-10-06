@@ -1,5 +1,0 @@
-interface:
-  display_name: "Brainstorming"
-  short_description: "Turn an idea into an approved design before coding"
-policy:
-  allow_implicit_invocation: false
