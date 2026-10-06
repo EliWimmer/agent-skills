@@ -1,0 +1,5 @@
+interface:
+  display_name: "Document Process"
+  short_description: "Write a verified project process guide"
+policy:
+  allow_implicit_invocation: false
