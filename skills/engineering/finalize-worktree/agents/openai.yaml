@@ -1,0 +1,5 @@
+interface:
+  display_name: "Finalize Worktree"
+  short_description: "Safely merge a completed worktree into local main"
+policy:
+  allow_implicit_invocation: false
