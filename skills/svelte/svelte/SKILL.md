@@ -1,7 +1,6 @@
 ---
 name: svelte
 description: Routes Svelte work to the relevant focused Svelte standards skills.
-disable-model-invocation: true
 ---
 
 # Svelte standards
