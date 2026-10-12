@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "Install skills": {
+      "command": "npx skills update EliWimmer/agent-skills -g"
+    }
+  }
+}
